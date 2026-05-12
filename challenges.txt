@@ -1,0 +1,14 @@
+C:\Users\FAAFO\restedancestor>go run main.go
+# github.com/bvinc/go-sqlite-lite/sqlite3
+sqlite3.c: In function 'sqlite3SelectNew':
+sqlite3.c:124800:10: warning: function may return address of local variable [-Wreturn-local-addr]
+124800 |   return pNew;
+       |          ^~~~
+sqlite3.c:124760:10: note: declared here
+124760 |   Select standin;
+       |          ^~~~~~~
+# restedancestor/database
+database\database.go:42:1: syntax error: non-declaration statement outside function body
+
+
+the above is the latest challenge im facing,
