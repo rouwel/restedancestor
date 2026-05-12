@@ -3,8 +3,9 @@ package database
 
 import (
 	"log"
-	"os"
 	"time"
+
+	"fmt"
 
 	"github.com/bvinc/go-sqlite-lite/sqlite3"
 )
@@ -38,11 +39,15 @@ type Stmt interface {
 	Exec(...interface{}) error
 	Scan(dst ...interface{}) error
 }
+THISSCHOULDBREAK
 
 // NewDb initialise a new connection
 func NewDb() Database {
-	p := "/src/github.com/bruno-chavez/restedancestor/database/database.db"
-	s, err := sqlite3.Open(os.Getenv("GOPATH") + p)
+	//p := "/src/github.com/bruno-chavez/restedancestor/database/database.db"
+	//s, err := sqlite3.Open(os.Getenv("GOPATH") + p)
+	path := "C:/Users/FAAFO/restedancestor/database/database.db"
+	fmt.Println("opening database at :", path)
+	s, err := sqlite3.Open(path)
 	if err != nil {
 		log.Fatal(err)
 	}
