@@ -2,12 +2,13 @@ package quotes
 
 import (
 	"errors"
-	"log"
-	"strings"
-	"strconv"
 	"fmt"
+	"log"
+	"strconv"
+	"strings"
 
-	"github.com/bruno-chavez/restedancestor/database"
+	"restedancestor/database"
+
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -91,7 +92,7 @@ func (r Repository) AllByWord(w string) []Quote {
 
 // AllLengthLessThanOrEqual returns all quotes with length less than or equal to
 func (r Repository) AllByLengthLessThanOrEqual(length uint64) []Quote {
-	
+
 	str := fmt.Sprintf("SELECT id_quote, content, score, uuid FROM quotes WHERE length(content)<=%d", length)
 
 	stmt, err := r.db.Prepare(str)
