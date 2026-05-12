@@ -6,7 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/bruno-chavez/restedancestor/handlers"
+	"restedancestor/handlers"
+
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -20,7 +21,8 @@ func main() {
 	router.GET("/senile", handlers.Senile)
 	router.GET("/search/:word", handlers.Search)
 	router.GET("/top", handlers.Top)
-	router.GET("/length/:len", handlers.Length)
+	//commented the error handlers length
+	//router.GET("/length/:len", handlers.Length)
 	//uuid routes
 	router.GET("/uuid/:uuid/find", handlers.Find)
 	router.POST("/uuid/:uuid/like", handlers.Like)
