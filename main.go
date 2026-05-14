@@ -6,20 +6,18 @@ import (
 	"log"
 	"net/http"
 	"restedancestor/database"
-
-	//"restedancestor/handlers"
-
+	"restedancestor/handlers"
 	//"github.com/julienschmidt/httprouter"
 )
 
 func main() {
 	// 1. Initialize DB from database.go
-	database.Database()
-	defer DB.Close()
-
+	database.Database("database/database.db")
+	defer database.DB.Close()
+	handlers.DB = database.DB
 	// 2. Map routes to handlers from handlers.go
-	http.HandleFunc("GET /api/quotes", GetQuotesHandler)
-	http.HandleFunc("GET /api/quotes/{id}", GetQuoteByIDHandler)
+	http.HandleFunc("GET /api/quotes", handlers.GetQuotesHandler)
+	http.HandleFunc("GET /api/quotes/{id}", handlers.GetQuoteByIDHandler)
 
 	log.Println("Server starting on :8080...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -28,18 +26,18 @@ func main() {
 }
 
 //func main() {
-	// initiates router
+// initiates router
 //	router := httprouter.New()
 
-	// lists routes
+// lists routes
 //	router.GET("/random", handlers.Random)
 //	router.GET("/all", handlers.All)
 //	router.GET("/senile", handlers.Senile)
 //	router.GET("/search/:word", handlers.Search)
 //	router.GET("/top", handlers.Top)
-	//commented the error handlers length
-	//router.GET("/length/:len", handlers.Length)
-	//uuid routes
+//commented the error handlers length
+//router.GET("/length/:len", handlers.Length)
+//uuid routes
 //	router.GET("/uuid/:uuid/find", handlers.Find)
 //	router.POST("/uuid/:uuid/like", handlers.Like)
 //	router.POST("/uuid/:uuid/dislike", handlers.Dislike)
