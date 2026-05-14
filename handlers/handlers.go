@@ -2,22 +2,23 @@
 package handlers
 
 import (
-
 	//"log"
+	"database/sql"
+	"encoding/json"
 	"net/http"
-	//"strings"
-	//"unicode"
-	//"restedancestor/database"
+	"strconv"
 	//"restedancestor/quotes"
-
 	//"github.com/julienschmidt/httprouter"
 )
+
 type Quote struct {
-	ID int `json:"id_quote"`
+	ID      int    `json:"id_quote"`
 	Content string `json:"content"`
-	Score int `json:"score"`
-	UUID string `json:"uuid"`
+	Score   int    `json:"score"`
+	UUID    string `json:"uuid"`
 }
+
+var DB *sql.DB
 
 func GetQuotesHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -48,7 +49,7 @@ func GetQuotesHandler(w http.ResponseWriter, r *http.Request) {
 
 func GetQuoteByIDHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	
+
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -70,6 +71,7 @@ func GetQuoteByIDHandler(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(q)
 }
+
 //var repo = quotes.NewRepository(database.NewDb())
 
 // Random handles the '/random' endpoint
@@ -146,21 +148,21 @@ func GetQuoteByIDHandler(w http.ResponseWriter, r *http.Request) {
 //		}
 //	}
 
-	//length, _ := strconv.ParseUint(word, 10, 32)
-	//qs := repo.AllByLengthLessThanOrEqual(length)
-	//qs := uint64(length)
+//length, _ := strconv.ParseUint(word, 10, 32)
+//qs := repo.AllByLengthLessThanOrEqual(length)
+//qs := uint64(length)
 
-	//if len(qs) != 0 {
-	//	err := writeResponse(w, qs)
-	//	if err != nil {
-	//		log.Fatal(err)
-	//	}
-	//} else {
-	//	err := writeNotFound(w, word)
-	//	if err != nil {
-	//		log.Fatal(err)
-	//	}
-	//}
+//if len(qs) != 0 {
+//	err := writeResponse(w, qs)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//} else {
+//	err := writeNotFound(w, word)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//}
 //}
 
 // Find handles the '/uuid/:uuid/find' endpoint
