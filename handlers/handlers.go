@@ -11,6 +11,7 @@ import (
 	//"github.com/julienschmidt/httprouter"
 )
 
+// Struct that holds the API data to be displayed is stored
 type Quote struct {
 	ID      int    `json:"id_quote"`
 	Content string `json:"content"`
@@ -18,12 +19,14 @@ type Quote struct {
 	UUID    string `json:"uuid"`
 }
 
+// Database variable
 var DB *sql.DB
 
+// Handler that generates all the quotes from the database
 func GetQuotesHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	rows, err := DB.Query("SELECT id_quote, content, score, uuid FROM quotes LIMIT 10")
+	rows, err := DB.Query("SELECT id_quote, content, score, uuid FROM quotes")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -47,6 +50,7 @@ func GetQuotesHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(quotes)
 }
 
+// handler that generates the a random quote based on the id given
 func GetQuoteByIDHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -69,6 +73,21 @@ func GetQuoteByIDHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	json.NewEncoder(w).Encode(q)
+}
+
+// Handler that generates random quotes
+func Random(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var q Quote
+
+	err := DB.QueryRow("SELECT id_quote, content, score, uuid FROM quotes ORDER BY RANDOM() LIMIT 1").
+		Scan(&q.ID, &q.Content, &q.Score, &q.UUID)
+
+	if err == sql.ErrNoRows {
+		http.Error(w, "Quote not found", http.StatusNotFound)
+		return
+	}
 	json.NewEncoder(w).Encode(q)
 }
 
