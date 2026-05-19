@@ -16,8 +16,9 @@ func main() {
 	defer database.DB.Close()
 	handlers.DB = database.DB
 	// 2. Map routes to handlers from handlers.go
-	http.HandleFunc("GET /api/quotes", handlers.GetQuotesHandler)
-	http.HandleFunc("GET /api/quotes/{id}", handlers.GetQuoteByIDHandler)
+	http.HandleFunc("/all", handlers.GetQuotesHandler)
+	http.HandleFunc("/api/quotes/{id}", handlers.GetQuoteByIDHandler)
+	http.HandleFunc("/random", handlers.Random)
 
 	log.Println("Server starting on :8080...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
