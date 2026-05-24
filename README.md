@@ -9,9 +9,9 @@ in JSON format.
 ##  Online
 
 `restedancestor` is currently online at 
-https://restedancestor.herokuapp.com, 
-skip to the 
-[Routes](https://github.com/bruno-chavez/restedancestor/tree/master#routes) 
+https://lnkd.in/daY7mdrd, 
+skip to the random route
+[Routes](default route is the random one) 
 section to see how you can consume the API.
 
 ## Local Use
@@ -33,23 +33,21 @@ cross-compiling can't be enabled.
 Requires Go to be installed on your machine. You can install Go from
 [here](https://golang.org/doc/install).
 
-Once installed, and with a correctly configured GOPATH, 
-on terminal type:
+Fork the repo, and clone it
 
 ```
-$ go get github.com/bruno-chavez/restedancestor
+$ git clone https://github.com/rouwel/restedancestor
 ```
 
-Then go to:
+Then from here you can either,build or run the API:
 
 ```
-$GOPATH/src/github.com/bruno-chavez/restedancestor
+go run . 
 ```
-
-And last, on a terminal type:
+or
 
 ```
-$ make install
+go build
 ```
 
 ##### Usage
@@ -75,26 +73,32 @@ There are more complete ways of doing requests to the API, and choosing one depe
 
 ## Routes
 
-### `/random`
+### `/`
 
 ##### GET:
 
-Responds with a JSON body with a random quote in it.
+If you decide to use curl (ensure API is running)
+```
+curl -i http://localhost:8080/
+```
 
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-Date: Mon, 04 Jun 2018 09:46:36 GMT
-Content-Length: 67
+Date: Sun, 24 May 2026 15:09:46 GMT
+Content-Length: 363
 
 {
-  "quote": "Towering. Fierce. Terrible. Nightmare made material.",
-  "uuid": "8aa2653b-2a4a-48c9-b0e5-e221aa9237bd",
-  "score": 0
+  {
+  "id_quote": 251,
+  "content": "A powerful blow!",
+  "score": 0,
+  "uuid": "4594f4af-9ec1-40d3-a644-6ce35f209df3"
+  }
 }
 ```
 
-
+(This part does not work yet)
 ### `/search/{word}`
 
 ##### GET:
@@ -135,7 +139,7 @@ Content-Length: 99
 ]
 ```
 
-
+(this works)
 ### `/all`
 
 ##### GET:
@@ -143,11 +147,6 @@ Content-Length: 99
 Responds with a JSON body with all the quotes available in the API.
 
 ```
-HTTP/1.1 200 OK
-Content-Type: application/json
-Date: Mon, 04 Jun 2018 09:47:14 GMT
-Transfer-Encoding: chunked
-
 [
   {
     "quote": "Brigands have the run of these lanes, keep to the side path, the Hamlet is just ahead.",
@@ -164,7 +163,7 @@ Transfer-Encoding: chunked
 ]
 ```
 
-
+(Doesnt work yet)
 ### `/senile`
 
 ##### GET:
@@ -185,6 +184,7 @@ Content-Length: 134
 }
 ```
 
+(Doesnt work)
 ### `/top`
 
 ##### GET:
@@ -212,6 +212,7 @@ Transfer-Encoding: chunked
 ]
 ```
 
+()Doenst work yet
 ### `/uuid/{uuid}/find`
 
 ##### GET:
@@ -232,6 +233,7 @@ Content-Length: 67
 }
 ```
 
+(Doesnt work yet)
 ### `/length/{len}`
 
 ##### GET:
@@ -260,6 +262,7 @@ Content-Length: 67
 ]
 ```
 
+(Doest work yets)
 ### `/uuid/{uuid}/like`
 
 ##### POST:
@@ -273,6 +276,7 @@ Date: Mon, 04 Jun 2018 09:46:36 GMT
 Content-Length: 0
 ```
 
+(Doesnt work yet)
 ### `/uuid/{uuid}/dislike`
 
 ##### POST:
