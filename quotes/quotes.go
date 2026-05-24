@@ -1,13 +1,9 @@
 package quotes
 
-import (
-	"github.com/satori/go.uuid"
-)
-
 // Quote describes a quote.
 type Quote struct {
-	id    int
-	Quote string    `json:"quote"`
-	UUID  uuid.UUID `json:"uuid"`
-	Score int       `json:"score"`
+	ID      int    `json:"id_quote"`
+	Content string `json:"content"`
+	Score   int    `json:"score"`
+	UUID    string `json:"uuid"`
 }
